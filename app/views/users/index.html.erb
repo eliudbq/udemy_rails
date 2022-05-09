@@ -1,0 +1,40 @@
+<div class="container">
+<h1>lista de usuarios</h1>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>clave</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% if @usuarios.length>0 %>
+          <% @usuarios.each do |usu| %>
+            <tr>
+                <td><%=usu.id%></td>
+                <td><%=usu.name%></td>
+                <td><%=usu.mail%></td>
+                <td><%=usu.password_digest%></td>
+                <td>
+                    <%= link_to 'editar', edit_user_path(usu.id), class:"btn btn-primary" %>
+                    <%= link_to 'eliminar', user_path(usu.id), method: :delete, data:{confirm: "¿confirma querer eliminar este susario?"}, class:"btn btn-danger" %>
+                </td>
+            </tr>
+          <%end%>
+        <% else %>
+            <tr>
+                <td colspan="3">
+                 tabla de usuario vacias comiense a crear aqui:
+                 <%= link_to "nuevo", new_user_path(), class:"nav-link" %>
+                </td>
+            </tr>
+        <%end%>
+        </tbody>
+    </table>
+</div>
+<div>
+    <%= will_paginate @usuarios%>
+</div>

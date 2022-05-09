@@ -1,0 +1,15 @@
+<div class="container">
+    <%= form_with(scope: :session, url:login_path, local: true) do |f| %>
+        <div class="form-group row">
+            <%=f.label :Usuario, class:"form-label col-2"%>
+            <%= f.text_field :usuario, class:"form-control col-10"%>
+        </div>
+        <div class="form-group row">
+            <%=f.label :Contraseña, class:"form-label col-2"%>
+            <%= f.password_field :clave, class:"form-control col-10", placeholde: "ingrese una contraseña"%>
+        </div>
+        <div class="form-group row align-items-center">
+            <%= f.submit "login", class:"btn btn-success" %>
+        </div>
+    <% end %>
+</div>

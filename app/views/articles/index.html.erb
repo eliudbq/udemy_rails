@@ -1,0 +1,49 @@
+<div class="container">
+    <h1>lista de articulos</h1>
+    <div class="flickr_pagination">
+        <%= will_paginate @articulos%>
+    </div>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>creado</th>
+                <th>titulo</th>
+                <th>fecha</th>
+                <th>categoria</th>
+                <th>autor</th>
+                <th>precio</th>
+                <th>acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @articulos.each do |art| %>
+            <tr>
+                <td><%=art.created_at%></td>
+                <td><%=art.titulo%></td>
+                <td><%=art.fecha%></td>
+                <td><%=art.categoria%></td>
+                <td><%=art.user_id%></td>
+                <td><%=art.precio%></td>
+                <td>
+                <%= link_to 'editar', edit_article_path(art.id) %>
+                <%= link_to 'eliminar', article_path(art.id), method: :delete, data:{confirm: "¿confirma querer eliminar este registro?"} %>
+                </td>
+            </tr>
+          <%end%>
+        </tbody>
+    </table>
+    <% @articulos.each do |art| %>
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                <img class="card-img-top" src="..." alt="Card image cap">
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"><%=art.titulo%></h5>
+                <p class="card-text"><%=art.categoria%><br/>Autor:<%=@auto[art.user_id] %><br/><%=art.precio%></p>
+                <%= link_to 'editar', edit_article_path(art.id), class:"btn btn-success" %>
+                <%= link_to 'eliminar', article_path(art.id),class:"btn btn-danger", method: :delete, data:{confirm: "¿confirma querer eliminar este registro?"} %>
+            </div>
+        </div>
+    <%end%>
+    
+</div>
